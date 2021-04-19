@@ -1,7 +1,12 @@
 package com.grzeluu.wateringreminder;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
@@ -16,6 +21,7 @@ import com.google.gson.reflect.TypeToken;
 import com.grzeluu.wateringreminder.databinding.ActivityMainBinding;
 import com.grzeluu.wateringreminder.model.Plant;
 import com.grzeluu.wateringreminder.model.PlantsAdapter;
+import com.grzeluu.wateringreminder.model.ReminderBroadcast;
 
 import java.util.ArrayList;
 
@@ -38,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+        createNotificationChanel();
 
         plantsArrayList = new ArrayList<Plant>();
         initPlantsList();
@@ -69,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     private void initRecyclerView() {
         if (plantsArrayList != null) {
             plantsLayoutManager = new LinearLayoutManager(this);
@@ -99,7 +106,33 @@ public class MainActivity extends AppCompatActivity {
                 Plant newPlant = (Plant) data.getExtras().get(AddNewPlantActivity.NEW_PLANT);
                 plantsArrayList.add(newPlant);
                 plantsAdapter.notifyDataSetChanged();
+
+                //TODO Set notification for first care
+                Intent intent = new Intent(MainActivity.this, ReminderBroadcast.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
+
+                AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+                long timeAtAddNewPlant = System.currentTimeMillis();
+                long millis = 1000 * 10;
+
+                alarmManager.set(AlarmManager.RTC_WAKEUP,
+                        timeAtAddNewPlant + millis,
+                        pendingIntent);
             }
+        }
+    }
+
+    private void createNotificationChanel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "NotificationChannel";
+            String description = "Chanel for care reminders";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("notifyCare", name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
         }
     }
 }

@@ -121,6 +121,7 @@
                 android:progressDrawable="@drawable/watering_track"
                 android:thumb="@drawable/outline_invert_colors_black_24"
                 android:thumbTint="@color/blue_700"
+                android:progress="5"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/wateringDaysTextView"
                 app:layout_constraintHorizontal_bias="0.5"

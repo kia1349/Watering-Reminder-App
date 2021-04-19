@@ -51,7 +51,6 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:max">46</item>
-        <item name="android:progress">0</item>
         <item name="android:splitTrack">false</item>
     </style>
 
