@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/custom_white_background">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="78dp"
+            android:layout_height="78dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:cardBackgroundColor="@color/green_500"
+            app:cardCornerRadius="100dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                app:cardCornerRadius="250dp">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/outline_add_photo_alternate_24" />
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/warning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="2dp"
+            android:elevation="2dp"
+            android:minWidth="36dp"
+            android:minHeight="36dp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/outline_error_24"
+            app:tint="@color/warning_red" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="100dp"
+            android:layout_marginEnd="60dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/edit"
+            app:layout_constraintHorizontal_bias="0.6"
+            app:layout_constraintStart_toEndOf="@+id/cardView"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RelativeLayout
+                android:id="@+id/waterLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="2dp">
+
+                <ProgressBar
+                    android:id="@+id/wateringProgressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:progressDrawable="@drawable/watering_track" />
+
+                <TextView
+                    android:id="@+id/waterLeftTv"
+                    style="@style/progressbar_textView"
+                    android:layout_toEndOf="@id/wateringIcon"
+                    android:text="Fertilizer" />
+
+                <ImageView
+                    android:id="@+id/wateringIcon"
+                    style="@style/small_icon"
+                    android:layout_alignStart="@+id/wateringProgressBar"
+                    app:srcCompat="@drawable/outline_grain_24"
+                    app:tint="@color/white" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/fertilizerLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="2dp">
+
+                <ProgressBar
+                    android:id="@+id/fertilizationProgressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:progressDrawable="@drawable/fertilization_track" />
+
+                <TextView
+                    android:id="@+id/fertilizerLeftTv"
+                    style="@style/progressbar_textView"
+                    android:layout_toEndOf="@id/fertilizationIcon"
+                    android:text="Fertilizer" />
+
+                <ImageView
+                    android:id="@+id/fertilizationIcon"
+                    style="@style/small_icon"
+                    android:layout_alignStart="@+id/fertilizationProgressBar"
+                    app:srcCompat="@drawable/outline_grain_24"
+                    app:tint="@color/white" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/sprayLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="2dp">
+
+                <ProgressBar
+                    android:id="@+id/sprayingProgressbar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:progressDrawable="@drawable/rotation_track" />
+
+                <TextView
+                    android:id="@+id/sprayLeftTv"
+                    style="@style/progressbar_textView"
+                    android:layout_toEndOf="@id/sprayIcon"
+                    android:text="Spray" />
+
+                <ImageView
+                    android:id="@+id/sprayIcon"
+                    style="@style/small_icon"
+                    android:layout_alignStart="@+id/sprayingProgressbar"
+                    app:srcCompat="@drawable/outline_shower_20"
+                    app:tint="@color/white" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rotateLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="2dp">
+
+                <ProgressBar
+                    android:id="@+id/rotatingProgressbar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:progressDrawable="@drawable/spraying_track" />
+
+                <TextView
+                    android:id="@+id/rotateLeftTv"
+                    style="@style/progressbar_textView"
+                    android:layout_toEndOf="@id/rotateIcon"
+                    android:text="Rotate" />
+
+                <ImageView
+                    android:id="@+id/rotateIcon"
+                    style="@style/small_icon"
+                    android:layout_alignStart="@id/rotatingProgressbar"
+                    app:srcCompat="@drawable/outline_rotate_left_24"
+                    app:tint="@color/white" />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/takeCare"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/custom_circular_blue_button_background"
+            app:layout_constraintBottom_toTopOf="@+id/edit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/outline_invert_colors_black_36"
+            app:tint="@color/white" />
+
+        <ImageView
+            android:id="@+id/edit"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/custom_circular_green_button_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/takeCare"
+            app:srcCompat="@drawable/outline_edit_white_36" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:text="@string/name"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/cardView"
+            app:layout_constraintStart_toStartOf="@+id/cardView"
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

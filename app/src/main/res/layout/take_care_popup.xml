@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/custom_white_background">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="@color/green_500"
+        app:cardCornerRadius="250dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            app:cardCornerRadius="250dp">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/outline_add_photo_alternate_24" />
+
+        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/wateringTv"
+        style="@style/normal_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/watering"
+        app:layout_constraintBottom_toBottomOf="@+id/waterIcon"
+        app:layout_constraintStart_toEndOf="@+id/waterIcon"
+        app:layout_constraintTop_toTopOf="@+id/waterIcon" />
+
+    <ImageView
+        android:id="@+id/waterIcon"
+        style="@style/common_icon"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:srcCompat="@drawable/outline_invert_colors_20"
+        app:tint="@color/blue_500" />
+
+    <TextView
+        android:id="@+id/fertilizationTv"
+        style="@style/normal_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/fertilizing"
+        app:layout_constraintBottom_toBottomOf="@+id/fertilizationIcon"
+        app:layout_constraintStart_toEndOf="@+id/fertilizationIcon"
+        app:layout_constraintTop_toTopOf="@+id/fertilizationIcon" />
+
+    <ImageView
+        android:id="@+id/fertilizationIcon"
+        style="@style/common_icon"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/waterIcon"
+        app:srcCompat="@drawable/outline_grain_black_20"
+        app:tint="@color/bronze_500" />
+
+    <TextView
+        android:id="@+id/sprayingTv"
+        style="@style/normal_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/spraying"
+        app:layout_constraintBottom_toBottomOf="@+id/sprayingIcon"
+        app:layout_constraintStart_toEndOf="@+id/sprayingIcon"
+        app:layout_constraintTop_toTopOf="@+id/sprayingIcon" />
+
+    <ImageView
+        android:id="@+id/sprayingIcon"
+        style="@style/common_icon"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fertilizationIcon"
+        app:srcCompat="@drawable/outline_shower_24"
+        app:tint="@color/green_500" />
+
+    <TextView
+        android:id="@+id/rotatingTv"
+        style="@style/normal_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/rotating"
+        app:layout_constraintBottom_toBottomOf="@+id/rotatingIcon"
+        app:layout_constraintStart_toEndOf="@+id/rotatingIcon"
+        app:layout_constraintTop_toTopOf="@+id/rotatingIcon" />
+
+    <ImageView
+        android:id="@+id/rotatingIcon"
+        style="@style/common_icon"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sprayingIcon"
+        app:srcCompat="@drawable/outline_rotate_left_24"
+        app:tint="@color/yellow_500" />
+
+    <CheckBox
+        android:id="@+id/wateringCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/wateringTv"
+        app:layout_constraintEnd_toEndOf="@+id/fertilizingCheckBox"
+        app:layout_constraintStart_toStartOf="@+id/fertilizingCheckBox"
+        app:layout_constraintTop_toTopOf="@+id/wateringTv" />
+
+    <CheckBox
+        android:id="@+id/fertilizingCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/fertilizationTv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fertilizationTv"
+        app:layout_constraintTop_toTopOf="@+id/fertilizationTv" />
+
+    <CheckBox
+        android:id="@+id/sprayingCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/sprayingTv"
+        app:layout_constraintEnd_toEndOf="@+id/fertilizingCheckBox"
+        app:layout_constraintStart_toStartOf="@+id/fertilizingCheckBox"
+        app:layout_constraintTop_toTopOf="@+id/sprayingTv" />
+
+    <CheckBox
+        android:id="@+id/rotatingCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/rotatingTv"
+        app:layout_constraintEnd_toEndOf="@+id/sprayingCheckBox"
+        app:layout_constraintStart_toStartOf="@+id/sprayingCheckBox"
+        app:layout_constraintTop_toTopOf="@+id/rotatingTv" />
+
+    <Button
+        android:id="@+id/confirmButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/custom_button_background"
+        android:drawableEnd="@drawable/outline_add_circle_outline_white_24"
+        android:paddingHorizontal="16sp"
+        android:text="@string/confirm"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rotatingCheckBox"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/nameTv"
+        style="@style/normal_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Name"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
+        app:layout_constraintStart_toEndOf="@+id/cardView"
+        app:layout_constraintTop_toTopOf="@+id/cardView" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

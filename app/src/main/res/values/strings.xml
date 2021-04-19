@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Watering Reminder</string>
+    <string name="flower">Flower</string>
+    <string name="settings">settings</string>
+    <string name="watering_reminder">Watering Reminder</string>
+    <string name="add_new_plant">Add new plant!</string>
+    <string name="plant_name">Plant name</string>
+    <string name="species">Species</string>
+    <string name="cancel">Cancel</string>
+    <string name="choose_plant_photo">Choose plant photo</string>
+    <string name="watering">Watering</string>
+    <string name="fertilizing">Fertilizing</string>
+    <string name="never">-</string>
+    <string name="spraying">Spraying</string>
+    <string name="rotating">Rotating</string>
+    <string name="_5_days">5 Days</string>
+    <string name="field_cannot_be_empty">This field cannot be empty!</string>
+    <string name="_1_day">1 Day</string>
+    <string name="days">Days</string>
+    <string name="months">Months</string>
+    <string name="take_a_photo_of_your_plant">Take a photo of your plant</string>
+    <string name="name">Name</string>
+    <string name="change_plant_photo">Change plant photo</string>
+    <string name="confirm">Confirm!</string>
+</resources>
