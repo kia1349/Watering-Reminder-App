@@ -24,13 +24,17 @@ import com.grzeluu.wateringreminder.model.PlantsAdapter;
 import com.grzeluu.wateringreminder.model.ReminderBroadcast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int NEW_PLANT_REQUEST_CODE = 1111;
     private static final String AUTO_PREF = "5555";
+    private static final String DAYS_PREF = "4444";
 
     private ArrayList<Plant> plantsArrayList;
+    public ArrayList<Integer> daysToNotifyArrayList;
 
     private RecyclerView.Adapter plantsAdapter;
     private RecyclerView.LayoutManager plantsLayoutManager;
@@ -48,11 +52,24 @@ public class MainActivity extends AppCompatActivity {
         createNotificationChanel();
 
         plantsArrayList = new ArrayList<Plant>();
+        daysToNotifyArrayList = new ArrayList<Integer>();
+
         initPlantsList();
+        initDaysToNotifyList();
 
         binding.addNewPlantFab.setOnClickListener(goToAddNewPlantActivity());
 
         initRecyclerView();
+    }
+
+    private void initDaysToNotifyList() {
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        String string = sharedPreferences.getString(DAYS_PREF, null);
+        Gson gson = new Gson();
+
+        daysToNotifyArrayList = gson.fromJson(string, new TypeToken<ArrayList<Integer>>() {
+
+        }.getType());
     }
 
     private void initPlantsList() {
@@ -73,7 +90,9 @@ public class MainActivity extends AppCompatActivity {
 
         Gson gson = new Gson();
         editor.putString(AUTO_PREF, gson.toJson(plantsArrayList));
-        editor.apply();
+        editor.putString(DAYS_PREF, gson.toJson(daysToNotifyArrayList));
+        editor.apply()
+        ;
     }
 
 
@@ -107,26 +126,36 @@ public class MainActivity extends AppCompatActivity {
                 plantsArrayList.add(newPlant);
                 plantsAdapter.notifyDataSetChanged();
 
-                //TODO Set notification for first care
                 Intent intent = new Intent(MainActivity.this, ReminderBroadcast.class);
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
-
                 AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-                long timeAtAddNewPlant = System.currentTimeMillis();
-                long millis = 1000 * 10;
+                daysToNotifyArrayList.add(newPlant.getFrequencyOfWatering());
+                daysToNotifyArrayList.add(newPlant.getFrequencyOfFertilizing());
+                daysToNotifyArrayList.add(newPlant.getFrequencyOfRotating());
+                daysToNotifyArrayList.add(newPlant.getFrequencyOfSpraying());
 
-                alarmManager.set(AlarmManager.RTC_WAKEUP,
-                        timeAtAddNewPlant + millis,
-                        pendingIntent);
+                daysToNotifyArrayList.removeAll(Arrays.asList(0));
+                Collections.sort(daysToNotifyArrayList);
+
+                long timeAtAddNewPlant = System.currentTimeMillis();
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
+
+                long millis = daysToMillis(daysToNotifyArrayList.get(0));
+                daysToNotifyArrayList.remove(0);
+
+                alarmManager.set(AlarmManager.RTC_WAKEUP, timeAtAddNewPlant + millis, pendingIntent);
             }
         }
+    }
+
+    private long daysToMillis(int daysCount) {
+        return daysCount * 24 * 60 * 60 * 1000;
     }
 
     private void createNotificationChanel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "NotificationChannel";
-            String description = "Chanel for care reminders";
+            String description = "Channel for care reminders";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel("notifyCare", name, importance);
             channel.setDescription(description);

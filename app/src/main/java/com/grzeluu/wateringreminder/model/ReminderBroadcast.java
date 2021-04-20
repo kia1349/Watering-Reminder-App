@@ -12,10 +12,10 @@ import com.grzeluu.wateringreminder.R;
 public class ReminderBroadcast extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "notify")
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "notifyCare")
                 .setSmallIcon(R.drawable.outline_local_florist_24)
-                .setContentTitle("Take care of your plants")
-                .setContentText("One of your plant need care")
+                .setContentTitle("Hello")
+                .setContentText("One of your plants needs care")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);

@@ -1,10 +1,13 @@
 package com.grzeluu.wateringreminder.model;
 
+import android.app.AlarmManager;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +28,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import static android.content.Context.ALARM_SERVICE;
 
 public class PlantsAdapter extends RecyclerView.Adapter<PlantsAdapter.ViewHolder> {
     private static final String EDIT_PLANT = "1111";
@@ -92,10 +97,10 @@ public class PlantsAdapter extends RecyclerView.Adapter<PlantsAdapter.ViewHolder
         }
 
         holder.binding.edit.setOnClickListener(editRecord(position));
-        holder.binding.takeCare.setOnClickListener(showPopup(plant));
+        holder.binding.takeCare.setOnClickListener(showPopup(plant, position));
     }
 
-    public View.OnClickListener showPopup(Plant plant) {
+    public View.OnClickListener showPopup(Plant plant, int position) {
         return v -> {
             Dialog careDialog = new Dialog(context);
             careDialog.setContentView(R.layout.take_care_popup);
@@ -109,22 +114,31 @@ public class PlantsAdapter extends RecyclerView.Adapter<PlantsAdapter.ViewHolder
             CheckBox spraying = careDialog.findViewById(R.id.sprayingCheckBox);
             CheckBox rotating = careDialog.findViewById(R.id.rotatingCheckBox);
 
-            image.setImageBitmap(BitmapFactory.decodeByteArray(plant.getByteArray(), 0, plant.getByteArray().length));
+            image.setImageBitmap(BitmapFactory.decodeByteArray(plant.getByteArray(), 0 , plant.getByteArray().length));
             name.setText(plant.getName());
+
+            Intent intent = new Intent(context, ReminderBroadcast.class);
+            AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
+            long timeAtAddNewPlant = SystemClock.elapsedRealtime();
 
             confirmButton.setOnClickListener(v1 -> {
                 Date currentDate = new Date();
-                if (watering.isChecked())
+                if (watering.isChecked()) {
                     plant.setLastWatering(currentDate);
+                }
 
-                if (fertilizing.isChecked())
+                if (fertilizing.isChecked()) {
                     plant.setLastFertilizing(currentDate);
+                }
 
-                if (spraying.isChecked())
+                if (spraying.isChecked()) {
                     plant.setLastSpraying(currentDate);
-
-                if (rotating.isChecked())
+                }
+                if (rotating.isChecked()) {
                     plant.setLastRotating(currentDate);
+                }
+
+                //TODO add new notification to notification channel
 
                 notifyDataSetChanged();
                 careDialog.dismiss();
@@ -132,6 +146,10 @@ public class PlantsAdapter extends RecyclerView.Adapter<PlantsAdapter.ViewHolder
 
             careDialog.show();
         };
+    }
+
+    private long daysToMillis(int daysCount) {
+        return daysCount * 24 * 60 * 60 * 1000;
     }
 
     private void setItemLayout(TextView text, ProgressBar progressBar, ImageView warning, int frequency, Date lastAction) {
@@ -195,3 +213,4 @@ public class PlantsAdapter extends RecyclerView.Adapter<PlantsAdapter.ViewHolder
         }
     }
 }
+
